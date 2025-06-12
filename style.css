@@ -1,0 +1,533 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Poppins', sans-serif;
+letter-spacing: 0.3px;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+ 
+}
+
+.section {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  padding: 5vh 5vw;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section.gray {
+   background: url('background.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* optional: gives parallax feel */
+}
+
+ 
+.welcome {
+ /* background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover; */
+  position: relative; /* This is important */
+  overflow: hidden;   /* Prevents image from bleeding outside */
+}
+
+.slideshow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  filter: brightness(90%);  /* optional: makes it slightly dimmer */
+}
+
+.slide.active {
+  opacity: 0.75; /* Adjust opacity for the active slide */
+}
+
+.welcome-logo {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%); /* shifted down a bit (~5vh) */
+  z-index: 2;
+  text-align: center;
+}
+
+.welcome-logo img {
+  width: 70vw;        /* Makes the image scale responsively */
+  max-width: 600px;   /* Optional: prevent it from getting too huge on wide screens */
+  /* height: auto;       /* Maintains aspect ratio */
+  max-height: 80vh;
+}
+
+/* Titles */
+.title {
+  position: absolute;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 6vw;
+  opacity: 0;
+  text-align: center;
+}
+
+.title.animate {
+  opacity: 1;
+}
+
+.title.slide-top.animate {
+  animation: fadeInSlideTop 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeInSlideTop {
+  from {
+    transform: translateX(-50%) translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+.title.slide-left.animate {
+  animation: slideTitleFromLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideTitleFromLeft {
+  from {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+}
+
+.title.slide-right.animate {
+  animation: slideTitleFromRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideTitleFromRight {
+  from {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+}
+
+.title.slide-bottom.animate {
+  animation: slideTitleFromBottom 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideTitleFromBottom {
+  from {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Animate-on-scroll */
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.visible.slide-in-left {
+  animation: slideLeftToCenter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  opacity: 1;
+}
+
+@keyframes slideLeftToCenter {
+  from { transform: translateX(-100px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.animate-on-scroll.visible.slide-in-right {
+  animation: slideRightToCenter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  opacity: 1;
+}
+
+@keyframes slideRightToCenter {
+  from { transform: translateX(100px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+/* Gallery */
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.gallery-images img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 3.5;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+/* Text */
+.details-text {
+  font-size: 2vw;
+  text-align: center;
+  margin: 1vh 0;
+  
+}
+.details-heading {
+  font-size: 4vw;
+  text-align: center;
+  margin: 1vh 0 0.5vh 0;
+  line-height: 1.2;
+  font-weight: 350;
+}
+
+.details-subtext {
+  font-size: 2vw;
+  text-align: center;
+  margin: 0.3vh 0;
+  line-height: 1.2;
+  font-weight: 200;
+}
+
+/* Wardrobe Section */
+.wardrobe-content {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto; /* Center the container */
+}
+
+/* Apply consistent styles to wardrobe images only */
+.wardrobe-img {
+  width: 100%;          /* Full width of the container (responsive) */
+  max-width: 200px;     /* Don't go beyond 300px */
+  height: auto;         /* Keep aspect ratio */
+  display: block;
+  margin: 0 auto 20px;  /* Center + space below */
+}
+
+/*Send Gifts Styles*/
+.sendgifts-content {
+  
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto; /* Center the container */
+}
+
+
+.qrcode-img {
+  width: 100%;          /* Full width of the container (responsive) */
+  max-width: 200px;     /* Don't go beyond 300px */
+  height: auto;         /* Keep aspect ratio */
+  display: block;
+  margin: 0 auto 20px;  /* Center + space below */
+}
+
+
+/* Fallback visibility handling */
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transition: opacity 2s ease-in-out;
+}
+/* Groom and Bride Images */
+.groom-img, .bride-img {
+  width: 90%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  border: 2px solid transparent;
+}
+
+/* COUNTDOWN TIMER*/ 
+.countdown-container {
+  text-align: center;
+  margin-bottom: 3vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.countdown-label {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1em;
+  color: #555;
+}
+
+.countdown-timer span {
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+}
+
+/*rsvpmenuButton Settings*/
+.rsvpButton {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+#rsvpmenuButton:hover {
+  background-color: rgba(214, 190, 214, 0.8);
+}
+#rsvpmenuButton {
+  background-color: rgba(180, 119, 180, 0.829);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 50px;
+  padding: 20px 80px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+.floating-navmenu {
+  position: fixed;
+  bottom: 25px; /* above the RSVP button */
+  right: 20px;
+  font-size: 30px;
+  font-weight: 600;
+  /*background-color: #ae95a957;*/
+  color: rgb(143, 13, 119);
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.slide-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(188, 147, 178, 0.512);
+  box-shadow: -2px 0 17px rgba(0, 0, 0, 0.5);
+  transition: right 0.4s ease;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.slide-menu ul {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+}
+
+.slide-menu ul li {
+  margin: 20px 0;
+}
+
+.slide-menu ul li a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  transition: all 0.3s ease;
+  text-align: right;
+}
+
+.slide-menu ul li a:hover {
+  
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 20px;
+}
+
+.slide-menu.open {
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 8vw;
+  }
+
+  .details-text {
+    font-size: 5vw;
+  }
+}
+
+
+
+/* -------------------------------------------
+   🔹 FLUID TYPOGRAPHY AND UNIVERSAL MEDIA QUERIES
+   Covers all iOS + Android + Tablets + Laptops + Desktops
+-------------------------------------------- */
+
+/* GLOBAL FLUID FONTS */
+.title {
+  font-size: clamp(24px, 6vw, 60px); /* scales from 24px to 60px */
+}
+
+.details-heading {
+  font-size: clamp(20px, 5vw, 50px);
+}
+
+.details-subtext,
+.details-text {
+  font-size: clamp(16px, 4vw, 30px);
+}
+
+.countdown-label {
+  font-size: clamp(14px, 2vw, 24px);
+}
+
+.countdown-timer {
+  font-size: clamp(14px, 1.5vw, 20px);
+}
+
+/* FLUID IMAGE MAX-SIZES */
+.wardrobe-img {
+  max-width: clamp(300px, 25vw, 250px);
+}
+
+.qrcode-img {
+  max-width: clamp(250px, 20vw, 200px);
+}
+
+.groom-img,
+.bride-img {
+  width: clamp(60%, 80vw, 90%);
+}
+
+/* Responsive Gallery Grid */
+.gallery-images {
+  grid-template-columns: repeat(auto-fit, minmax(clamp(90px, 25vw, 200px), 1fr));
+}
+
+/* Adjust container width */
+.wardrobe-content,
+.sendgifts-content {
+  max-width: clamp(300px, 80vw, 500px);
+}
+
+
+
+/* 📱 Phones: Portrait (most Android + iPhones) */
+@media (max-width: 480px) {
+  .gallery-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* 📱 Phones: Landscape + Small Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+  .gallery-images {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+}
+
+
+/* 💻 Tablets + Laptops */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .gallery-images {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+
+/* 🖥️ Desktops 1201px–1439px */
+@media (min-width: 1201px) and (max-width: 1439px) {
+  .gallery-images {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+
+/* 🖥️ Extra Large Desktops (1440px and up) */
+@media (min-width: 1440px) {
+  .gallery-images {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+
+/* 🔄 Orientation: Landscape */
+@media screen and (orientation: landscape) {
+  .title {
+    top: 5vh;
+  }
+
+  .gallery-images {
+    gap: 15px;
+  }
+
+  .countdown-container {
+    margin-bottom: 2vh;
+  }
+}
+
+
+/* 🔄 Orientation: Portrait */
+@media screen and (orientation: portrait) {
+  .title {
+    top: 8vh;
+  }
+
+  .gallery-images {
+    gap: 10px;
+  }
+
+  .groom-img,
+  .bride-img {
+    width: 90%;
+  }
+}
