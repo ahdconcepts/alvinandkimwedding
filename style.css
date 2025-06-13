@@ -139,7 +139,7 @@ letter-spacing: 0.3px;
 }
 
 .title.slide-bottom.animate {
-  animation: slideTitleFromBottom 1.3s cubic-bezier(0.33, 1, 0.5, 1) forwards;
+  animation: slideTitleFromBottom 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes slideTitleFromBottom {
@@ -159,7 +159,7 @@ letter-spacing: 0.3px;
 }
 
 .animate-on-scroll.visible.slide-in-left {
-  animation: slideLeftToCenter 3s cubic-bezier(0.30, 1, 0.5, 1) forwards;
+  animation: slideLeftToCenter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 1;
 }
 
@@ -169,7 +169,7 @@ letter-spacing: 0.3px;
 }
 
 .animate-on-scroll.visible.slide-in-right {
-  animation: slideRightToCenter 3s cubic-bezier(0.30, 1, 0.5, 1) forwards;
+  animation: slideRightToCenter 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   opacity: 1;
 }
 
@@ -529,77 +529,5 @@ html {
   .groom-img,
   .bride-img {
     width: 90%;
-  }
-}
-
-/* 🔧 iOS Safari Performance & Scroll Fixes */
-html, body {
-  -webkit-overflow-scrolling: touch;  /* Enables native momentum scroll on iOS */
-  overscroll-behavior-y: contain;     /* Prevents pull-to-refresh and scroll chaining */
-  transform: translateZ(0);           /* Triggers GPU acceleration */
-  backface-visibility: hidden;       /* Prevents flickering */
-  will-change: transform;            /* Optimizes scroll animations */
-}
-
-/* 🔧 Improves scroll snapping stability and render smoothness */
-.section {
-  scroll-snap-stop: always;          /* Forces snap alignment even on fast scroll */
-  will-change: transform;            /* Optimizes animation and scroll transitions */
-  position: relative;                /* Creates local stacking context */
-  z-index: 1;                         /* Ensures it's under floating buttons */
-}
-
-/* 🔧 Make RSVP and Navigation Floating Buttons Always Visible */
-.rsvpButton {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999; /* ✅ raised to stay on top of all sections */
-}
-
-.floating-navmenu {
-  position: fixed;
-  bottom: 25px;
-  right: 20px;
-  z-index: 9999; /* ✅ raised to stay above everything */
-}
-
-/* 🔧 Prevent slideshows or background from overlapping buttons */
-.slideshow {
-  z-index: 0; /* ✅ ensures slideshow stays behind */
-}
-
-/* ---------------------------------------------
-   ✅ iOS FIX SECTION – Floating Buttons + Background Handling
---------------------------------------------- */
-
-/* Fix iOS rendering bug that hides fixed elements */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 2147483647; /* ensures all fixed elements stack properly on iOS */
-  visibility: hidden;
-}
-
-/* Ensure floating buttons are always visible */
-.rsvpButton,
-.floating-navmenu {
-  position: fixed;
-  z-index: 2147483646 !important; /* just under the body::after trick */
-}
-
-/* Prevent stacking issues caused by fixed backgrounds */
-.section.gray {
-  background-attachment: scroll; /* iOS-safe */
-}
-
-/* Desktop-only parallax effect */
-@media (min-width: 1024px) {
-  .section.gray {
-    background-attachment: fixed;
   }
 }
