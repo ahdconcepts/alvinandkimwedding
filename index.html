@@ -4,19 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Website</title>
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
+ 
+ <!-- Preload background and slideshow images for iOS smoothness -->
+<link rel="preload" as="image" href="background.jpg">
+<link rel="preload" as="image" href="image1.jpg">
+<link rel="preload" as="image" href="image2.jpg">
+<link rel="preload" as="image" href="image3.jpg">
+<link rel="preload" as="image" href="groom.png">
+<link rel="preload" as="image" href="bride.png">
+<link rel="preload" as="image" href="dresscode.png">
+<link rel="preload" as="image" href="color palletes.png">
+<link rel="preload" as="image" href="qrcode.png">
+<link rel="preload" as="image" href="logo.png">
 
-  <!-- CSS -->
+ 
+ 
+ 
+ 
   <link rel="stylesheet" href="style.css">
-
-  <!-- 🔧 iOS Safari Preload Critical Images -->
-  <link rel="preload" as="image" href="image1.jpg">
-  <link rel="preload" as="image" href="image2.jpg">
-  <link rel="preload" as="image" href="image3.jpg">
-  <link rel="preload" as="image" href="background.jpg">
 </head>
 <body>
 
@@ -52,44 +60,49 @@
       <img src="image2.jpg" alt="Moment 2">
       <img src="image3.jpg" alt="Moment 3">
       <img src="image1.jpg" alt="Moment 4">
-      <img src="image3.jpg" alt="Moment 5">
-      <img src="image1.jpg" alt="Moment 6">
+      <img src="image3.jpg" alt="Moment 3">
+      <img src="image1.jpg" alt="Moment 4">
     </div>
   </section>
 
   <!-- Details Section -->
   <section id="details" class="section details gray">
+
     <h2 class="title slide-right">WEDDING DETAILS</h2>
 
-    <div style="height: 3vh;"></div>
+    <div style="height: 3vh;"></div> <!-- Spacer -->
 
+    
     <div class="countdown-container">
-      <h2 class="countdown-label"></h2>
-      <div id="countdown" class="countdown-timer">
-        <span><strong id="days">--</strong><br>Days</span>
-        <span><strong id="hours">--</strong><br>Hrs</span>
-        <span><strong id="minutes">--</strong><br>Min</span>
-        <span><strong id="seconds">--</strong><br>Sec</span>
-      </div>
-    </div>
+  <h2 class="countdown-label"></h2>
+  <div id="countdown" class="countdown-timer">
+    <span><strong id="days">--</strong><br>Days</span>
+    <span><strong id="hours">--</strong><br>Hrs</span>
+    <span><strong id="minutes">--</strong><br>Min</span>
+    <span><strong id="seconds">--</strong><br>Sec</span>
+  </div>
+</div>
+
 
     <h2 class="details-heading">SEPTEMBER 22, 2025</h2>
 
-    <div style="height: 3vh;"></div>
+    <div style="height: 3vh;"></div> <!-- Spacer -->
 
     <h2 class="details-heading">TIMELINE</h2>
     <h3 class="details-subtext">02:30 PM - Wedding Ceremony</h3>
     <h3 class="details-subtext">04:00 - Cocktails and PikaPika</h3>
     <h3 class="details-subtext">06:00 PM - Reception</h3>
 
-    <div style="height: 3vh;"></div>
+    <div style="height: 3vh;"></div> <!-- Spacer -->
 
     <h2 class="details-heading">CHURCH</h2>
     <h3 class="details-subtext">Cebu Metropolitan Cathedral</h3>
     <h3 class="details-subtext">Mabini Street, Cebu City 6000</h3>
     <h3 class="details-subtext">02:30 PM</h3>
 
-    <div style="height: 3vh;"></div>
+    
+
+    <div style="height: 3vh;"></div> <!-- Spacer -->
 
     <h2 class="details-heading">RECEPTION</h2>
     <h3 class="details-subtext">Bai Hotel Cebu</h3>
@@ -102,11 +115,11 @@
     <h2 class="title slide-bottom">ATTIRE</h2>
     <div class="wardrobe-content">
       <img src="dresscode.png" alt="Dress Code" class="wardrobe-img">
-      <div style="height: 3vh;"></div>
+      <div style="height: 3vh;"></div> <!-- Spacer -->
       <p>We love to see you in your formal/semi-formal attire with these colors</p>
-      <div style="height: 3vh;"></div>
+      <div style="height: 3vh;"></div> <!-- Spacer -->
       <img src="color palletes.png" alt="Color palletes" class="wardrobe-img">
-      <div style="height: 3vh;"></div>
+      <div style="height: 3vh;"></div> <!-- Spacer -->
       <p>STRICTLY NO slippers, denims and shorts</p>
     </div>
   </section>
@@ -115,81 +128,89 @@
   <section id="gifts" class="section gifts gray">
     <h2 class="title slide-top">Send your GIFTS</h2>
     <div class="sendgifts-content">
-      <div style="height: 7vh;"></div>
+      <div style="height: 7vh;"></div> <!-- Spacer -->
       <img src="qrcode.png" alt="QR Gcash Code" class="qrcode-img">
-      <div style="height: 3vh;"></div>
-      <p>The biggest gift to us is your support and presence at our wedding. Please don't feel obligated to give anything more.</p>
+      <div style="height: 3vh;"></div> <!-- Spacer -->
+      <p>The biggest gift to us is your support and presence at our wedding. Please dont feel obligated to give anything more.</p>
       <p>However, if you wish to honor us with a gift, a monetary gift would be deeply appreciated.</p>
     </div>
   </section>
 
-  <!-- 🔧 iOS Safari: Force image decode early -->
-  <div style="display: none;">
-    <img src="image1.jpg" alt="">
-    <img src="image2.jpg" alt="">
-    <img src="image3.jpg" alt="">
-    <img src="background.jpg" alt="">
-  </div>
 
   <script>
-    function updateCountdown() {
-      const weddingDate = new Date("September 22, 2025 14:30:00").getTime();
-      const now = new Date().getTime();
-      const gap = weddingDate - now;
+  function updateCountdown() {
+    const weddingDate = new Date("September 22, 2025 14:30:00").getTime();
+    const now = new Date().getTime();
+    const gap = weddingDate - now;
 
-      if (gap <= 0) {
-        document.getElementById("countdown").innerHTML = "It's the big day!";
-        return;
-      }
-
-      const second = 1000;
-      const minute = second * 60;
-      const hour = minute * 60;
-      const day = hour * 24;
-
-      const days = Math.floor(gap / day);
-      const hours = Math.floor((gap % day) / hour);
-      const minutes = Math.floor((gap % hour) / minute);
-      const seconds = Math.floor((gap % minute) / second);
-
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+    if (gap <= 0) {
+      document.getElementById("countdown").innerHTML = "It's the big day!";
+      return;
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-  <div class="rsvpButton">
-    <button id="rsvpmenuButton">RSVP Now</button>
-  </div>
-  <script>
-    document.getElementById('rsvpmenuButton').onclick = function () {
-      window.location.href = 'rsvp.html';
-    };
-  </script>
+    const days = Math.floor(gap / day);
+    const hours = Math.floor((gap % day) / hour);
+    const minutes = Math.floor((gap % hour) / minute);
+    const seconds = Math.floor((gap % minute) / second);
 
-  <div class="floating-navmenu" id="navToggle">&#9776;</div>
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+  }
 
-  <nav class="slide-menu" id="slideMenu">
-    <ul>
-      <li><a href="#welcome">Welcome</a></li>
-      <li><a href="#groom">The Groom</a></li>
-      <li><a href="#bride">The Bride</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#details">Event Details</a></li>
-      <li><a href="#wardrobe">Attire</a></li>
-      <li><a href="#gifts">Send Gifts</a></li>
-      <li><a href="faqs.html">FAQ's</a></li>
-    </ul>
-  </nav>
+  setInterval(updateCountdown, 1000);
+  updateCountdown(); // Run once immediately
+</script>
+
+<!-- Floating RSVP Button -->
+  
+    <div class="rsvpButton">
+      <button id="rsvpmenuButton">RSVP Now</button>
+    </div>
+    <script>
+  document.getElementById('rsvpmenuButton').onclick = function() {
+    window.location.href = 'rsvp.html';
+  };
+
+</script>
+
+<!-- Floating Navigation Menu Button (Bottom Right) -->
+<div class="floating-navmenu" id="navToggle">&#9776;</div>
+
+<!-- Slide-In Navigation Menu -->
+<nav class="slide-menu" id="slideMenu">
+  <ul>
+    <li><a href="#welcome">Welcome</a></li>
+    <li><a href="#groom">The Groom</a></li>
+    <li><a href="#bride">The Bride</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#details">Event Details</a></li>
+    <li><a href="#wardrobe">Attire</a></li>
+    <li><a href="#gifts">Send Gifts</a></li>
+    <li><a href="faqs.html">FAQ's</a></li>
+    
+  </ul>
+</nav>
+
 
   <script src="script.js"></script>
 
-  <p style="font-weight: 200; color: #ffffff; background-color: #7b6f7e; font-size: 10px; text-align: center; padding: 4px 0;">
-    created by: Alvin Hisula Dungog <br> Interested? Email me at ahdconcepts@gmail.com <br> version 1.0.0
-  </p>
+
+  <p style="font-weight: 200;
+                  color: #ffffff;
+                  background-color: #7b6f7e;
+              font-size: 10px;
+              text-align: center;
+              padding: 4px 0;">
+  created by: Alvin Hisula Dungog <br> Interested? Email me at ahdconcepts@gmail.com<br> preload
+</p>
+  
+
 </body>
 </html>
