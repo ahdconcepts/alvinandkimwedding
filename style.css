@@ -36,7 +36,7 @@ html, body {
   align-items: center;
   justify-content: center;
   background: transparent; /* Transparent to reveal fixed background */
-  color: #000;
+  color: #555555;
 }
 
 .section.gray {
