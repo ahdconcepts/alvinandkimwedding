@@ -55,7 +55,7 @@ position: relative;
   background: url('background.jpg') no-repeat center center;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  z-index: -999;
   pointer-events: none;
 }
 /* ------------- THIS IS ADDITIONAL CODE FOR TESTING -REMOVE THIS TO RETURN TO ORIFGINAL---------*/
