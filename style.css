@@ -32,12 +32,17 @@ html,body{
 }
 
 .section.gray::before{
-  content:"";
-  position:absolute;                /* stays inside the section */
-  inset:0;                           /* top/right/bottom/left:0 */
-  background:url('background.jpg') center/cover no-repeat;
-  z-index:-1;                       /* behind section content */
-  pointer-events:none;
+  content: "";
+  position: fixed; /* Fix it to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('background.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* not required here but safe */
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Optional “true parallax” on bigger screens */
@@ -190,3 +195,15 @@ html,body{
 }
 @media(orientation:landscape){.title{top:5vh}}
 @media(orientation:portrait){ .title{top:8vh} }
+
+@media (min-width: 1024px) {
+  .section.gray::before {
+    position: fixed;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section.gray::before {
+    position: absolute;
+  }
+}
