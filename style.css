@@ -245,7 +245,7 @@ html, body {
   justify-content: center;
   gap: 10px;
   font-size: clamp(14px, 1.5vw, 20px);
-  color: #555;
+  color: #952893;
 }
 
 .countdown-timer span {
