@@ -43,6 +43,7 @@ position: relative;
   background-size: cover; */
   position: relative; /* This is important */
   overflow: hidden;   /* Prevents image from bleeding outside */
+  z-index: 3;
 }
 
 /* ------------- THIS IS ADDITIONAL CODE FOR TESTING -REMOVE THIS TO RETURN TO ORIFGINAL---------*/
