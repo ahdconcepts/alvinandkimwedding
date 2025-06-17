@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Website</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet" />
 
   <!-- Preload key images -->
-  <link rel="preload" as="image" href="background.jpg">
-  <link rel="preload" as="image" href="image1.jpg">
-  <link rel="preload" as="image" href="image2.jpg">
-  <link rel="preload" as="image" href="image3.jpg">
+  <link rel="preload" as="image" href="background.jpg" />
+  <link rel="preload" as="image" href="image1.jpg" />
+  <link rel="preload" as="image" href="image2.jpg" />
+  <link rel="preload" as="image" href="image3.jpg" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 🔹 Fixed background for all sections except #welcome -->
-  <div class="fixed-background"></div>
+  <!-- ✅ Fixed background that stays behind all gray sections -->
+  <div class="site-wallpaper"></div>
 
-  <!-- 🔸 WELCOME (has its own slideshow) -->
+  <!-- 🔸 WELCOME SECTION -->
   <section id="welcome" class="section welcome">
     <div class="slideshow">
-      <img src="image1.jpg" class="slide active"  alt="Slide 1">
-      <img src="image2.jpg" class="slide"         alt="Slide 2">
-      <img src="image3.jpg" class="slide"         alt="Slide 3">
+      <img src="image1.jpg" class="slide active" alt="Slide 1" />
+      <img src="image2.jpg" class="slide" alt="Slide 2" />
+      <img src="image3.jpg" class="slide" alt="Slide 3" />
     </div>
     <div class="welcome-logo">
-      <img src="logo.png" alt="Wedding Logo">
+      <img src="logo.png" alt="Wedding Logo" />
     </div>
   </section>
 
   <!-- 🔸 GROOM -->
   <section id="groom" class="section gray">
     <h2 class="title slide-top">THE GROOM</h2>
-    <img src="groom.png" alt="The Groom" class="slide-in-left animate-on-scroll groom-img">
+    <img src="groom.png" alt="The Groom" class="slide-in-left animate-on-scroll groom-img" />
   </section>
 
   <!-- 🔸 BRIDE -->
   <section id="bride" class="section gray">
     <h2 class="title slide-top">THE BRIDE</h2>
-    <img src="bride.png" alt="The Bride" class="slide-in-right animate-on-scroll bride-img">
+    <img src="bride.png" alt="The Bride" class="slide-in-right animate-on-scroll bride-img" />
   </section>
 
   <!-- 🔸 GALLERY -->
   <section id="gallery" class="section gray">
     <h2 class="title slide-left">Gallery</h2>
     <div class="gallery-images">
-      <img src="image1.jpg" alt="Moment 1">
-      <img src="image2.jpg" alt="Moment 2">
-      <img src="image3.jpg" alt="Moment 3">
-      <img src="image1.jpg" alt="Moment 4">
-      <img src="image3.jpg" alt="Moment 5">
-      <img src="image1.jpg" alt="Moment 6">
+      <img src="image1.jpg" alt="Moment 1" />
+      <img src="image2.jpg" alt="Moment 2" />
+      <img src="image3.jpg" alt="Moment 3" />
+      <img src="image1.jpg" alt="Moment 4" />
+      <img src="image3.jpg" alt="Moment 5" />
+      <img src="image1.jpg" alt="Moment 6" />
     </div>
   </section>
 
@@ -101,11 +101,11 @@
   <section id="wardrobe" class="section gray">
     <h2 class="title slide-bottom">ATTIRE</h2>
     <div class="wardrobe-content">
-      <img src="dresscode.png" alt="Dress Code" class="wardrobe-img">
+      <img src="dresscode.png" alt="Dress Code" class="wardrobe-img" />
       <div style="height:3vh"></div>
       <p>We love to see you in formal/semi-formal attire with these colors</p>
       <div style="height:3vh"></div>
-      <img src="color palettes.png" alt="Color Palettes" class="wardrobe-img">
+      <img src="color palettes.png" alt="Color Palettes" class="wardrobe-img" />
       <div style="height:3vh"></div>
       <p><strong>STRICTLY NO</strong> slippers, denims or shorts</p>
     </div>
@@ -116,17 +116,17 @@
     <h2 class="title slide-top">Send Your GIFTS</h2>
     <div class="sendgifts-content">
       <div style="height:7vh"></div>
-      <img src="qrcode.png" alt="GCash QR Code" class="qrcode-img">
+      <img src="qrcode.png" alt="GCash QR Code" class="qrcode-img" />
       <div style="height:3vh"></div>
       <p>The biggest gift to us is your presence at our wedding.</p>
       <p>If you wish to honor us further, a monetary gift would be deeply appreciated.</p>
     </div>
   </section>
 
-  <!-- 🔹 Scripts -->
+  <!-- ✅ Script file -->
   <script src="script.js"></script>
 
-  <!-- Floating RSVP button -->
+  <!-- 🔸 RSVP Floating Button -->
   <div class="rsvpButton">
     <button id="rsvpmenuButton">RSVP Now</button>
   </div>
@@ -135,7 +135,7 @@
       window.location.href = 'rsvp.html';
   </script>
 
-  <!-- Floating Nav button + side menu -->
+  <!-- 🔸 Floating Nav Menu -->
   <div class="floating-navmenu" id="navToggle">&#9776;</div>
   <nav class="slide-menu" id="slideMenu">
     <ul>
@@ -150,7 +150,7 @@
     </ul>
   </nav>
 
-  <!-- Footer -->
+  <!-- 🔸 Footer -->
   <p style="font-weight:200;color:#fff;background:#7b6f7e;font-size:10px;text-align:center;padding:4px 0">
     Created by Alvin Hisula Dungog &nbsp;|&nbsp; © 2025
   </p>
