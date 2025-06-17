@@ -28,7 +28,7 @@ html,body{
   position:relative;                /* create context for ::before */
   z-index:0;
   overflow:hidden;
-  color:#fff;                       /* readable on dark bg */
+  color:#555555;                       /* readable on dark bg */
 }
 
 .section.gray::before{
