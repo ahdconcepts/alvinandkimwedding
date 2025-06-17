@@ -1,14 +1,4 @@
-// Slideshow logic
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slideshow .slide');
-
-setInterval(() => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('active');
-}, 4000);
-
-// Title animation on scroll
+/* ======================= Scroll-based Title Animations ======================= */
 const titleObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -23,14 +13,12 @@ document.querySelectorAll('.title').forEach(el => {
   titleObserver.observe(el);
 });
 
-// Element animation on scroll (like groom, bride, etc.)
+/* ======================= Animate-on-scroll Elements (e.g. Groom, Bride) ======================= */
 const imageObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Trigger animation every time it comes into view
       entry.target.classList.add('visible');
     } else {
-      // Reset animation when it leaves the viewport
       entry.target.classList.remove('visible');
     }
   });
@@ -40,18 +28,124 @@ document.querySelectorAll('.animate-on-scroll').forEach(el => {
   imageObserver.observe(el);
 });
 
+/* ======================= Gallery Modal Viewer ======================= */
+const galleryImgs = Array.from(document.querySelectorAll('#galleryImages img'));
+galleryImgs.forEach(img => {
+  const preload = new Image();
+  preload.src = img.src;
+});
 
+const modal = document.getElementById('imageViewerModal');
+const modalImg = document.getElementById('modalImage');
+const closeBtn = modal.querySelector('.close-btn');
+const prevBtn = modal.querySelector('.prev');
+const nextBtn = modal.querySelector('.next');
+const loader = modal.querySelector('.loader');
+let currentIndex = 0;
 
+function openModal(src, index) {
+  currentIndex = index;
+  loader.style.display = 'block';
+  modalImg.style.display = 'none';
+  modalImg.src = src;
+  modal.classList.add('open');
+}
+
+function closeModal() {
+  modal.classList.add('closing');
+  modal.addEventListener(
+    'transitionend',
+    () => modal.classList.remove('open', 'closing'),
+    { once: true }
+  );
+}
+
+function showImage(index) {
+  currentIndex = (index + galleryImgs.length) % galleryImgs.length;
+  loader.style.display = 'block';
+  modalImg.style.display = 'none';
+  modalImg.src = galleryImgs[currentIndex].src;
+}
+
+galleryImgs.forEach((img, idx) => {
+  img.addEventListener('click', () => openModal(img.src, idx));
+});
+
+modalImg.addEventListener('load', () => {
+  loader.style.display = 'none';
+  modalImg.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', closeModal);
+prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+
+let startX = 0;
+modal.addEventListener('touchstart', e => (startX = e.touches[0].clientX));
+modal.addEventListener('touchend', e => {
+  const endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) nextBtn.click();
+  else if (endX - startX > 50) prevBtn.click();
+});
+
+modal.addEventListener('click', e => {
+  if (e.target === modal) closeModal();
+});
+
+/* ======================= Floating Nav Menu Auto-Close ======================= */
 const navToggle = document.getElementById('navToggle');
 const slideMenu = document.getElementById('slideMenu');
 
-navToggle.addEventListener('click', () => {
+// Toggle open/close on click
+navToggle.addEventListener('click', e => {
+  e.stopPropagation(); // prevent bubbling to document
   slideMenu.classList.toggle('open');
 });
 
-// Optional: close menu when a nav link is clicked
+// Close menu when a nav link is clicked
 slideMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', e => {
+    e.stopPropagation();
     slideMenu.classList.remove('open');
   });
 });
+
+// Close when clicking outside the menu and toggle
+document.addEventListener('click', e => {
+  if (
+    !slideMenu.contains(e.target) &&
+    !navToggle.contains(e.target)
+  ) {
+    slideMenu.classList.remove('open');
+  }
+});
+
+
+/* ======================= Welcome Section Slideshow ======================= */
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slideshow .slide');
+
+if (slides.length > 0) {
+  setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 4000); // Change every 4 seconds
+}
+
+/* ======================= SCROLL DOTS ======================= */
+
+const dots = document.querySelectorAll('.dot');
+const sections = document.querySelectorAll('.section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const index = [...sections].indexOf(entry.target);
+      dots.forEach(dot => dot.classList.remove('active'));
+      if (dots[index]) dots[index].classList.add('active');
+    }
+  });
+}, { threshold: 0.6 });
+
+sections.forEach(section => observer.observe(section));
