@@ -26,9 +26,15 @@ letter-spacing: 0.3px;
 }
 
 .section.gray {
+position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+
+/*return this to go back to original published
    background: url('background.jpg') no-repeat center center;
   background-size: cover;
-  background-attachment: fixed; /* optional: gives parallax feel */
+  background-attachment: fixed; /* optional: gives parallax feel */ 
 }
 
  
@@ -38,6 +44,22 @@ letter-spacing: 0.3px;
   position: relative; /* This is important */
   overflow: hidden;   /* Prevents image from bleeding outside */
 }
+
+/* ------------- THIS IS ADDITIONAL CODE FOR TESTING -REMOVE THIS TO RETURN TO ORIFGINAL---------*/
+.section.gray::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('background.jpg') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  pointer-events: none;
+}
+/* ------------- THIS IS ADDITIONAL CODE FOR TESTING -REMOVE THIS TO RETURN TO ORIFGINAL---------*/
+
 
 .slideshow {
   position: absolute;
