@@ -267,8 +267,9 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 10px;
-  font-size: clamp(14px, 1.5vw, 20px);
+  font-size: clamp(16px, 2vw, 25px);
   color: #952893;
+  font-weight: bold;
 }
 
 .countdown-timer span {
