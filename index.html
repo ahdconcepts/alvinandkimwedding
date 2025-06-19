@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wedding Website</title>
+  <title>Alvin and Kim Wedding</title>
+<!-- Preload fetch -->
+  <link rel="prefetch" href="index.html" as="document">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -205,7 +207,17 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown(); // Initial call
 
+</script>
 
+<script>
+  // Check if landing was visited
+  if (!sessionStorage.getItem('fromLanding')) {
+    // Redirect to landing.html if not coming from it
+    window.location.replace('landing.html');
+  } else {
+    // Remove flag after landing is passed
+    sessionStorage.removeItem('fromLanding');
+  }
 </script>
 
   <!-- ✅ Script file -->
