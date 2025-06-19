@@ -1,0 +1,165 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: #ededed;
+}
+
+.gate-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Gates */
+.gate {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  transition: transform 1.6s ease-in-out;
+  will-change: transform;
+  z-index: 2;
+}
+
+.gate-left {
+  left: 0;
+  background: #f6f3ed;
+  transform: translateX(0);
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.gate-right {
+  right: 0;
+  background: #f1eee9;
+  transform: translateX(0);
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.gate-left.open {
+  transform: translateX(-100%);
+}
+
+.gate-right.open {
+  transform: translateX(100%);
+}
+
+/* Center Button – spinning & bouncing */
+#openBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;            /* New size */
+  height: auto;
+  cursor: pointer;
+  z-index: 3;
+  user-select: none;
+  transition: opacity 0.4s ease;
+  transform: translate(-50%, -50%);
+  animation: spinCentered 8s linear infinite;
+}
+
+#openBtn.clicked {
+  opacity: 0;
+  pointer-events: none;
+  animation: bounceCentered 0.5s ease forwards;
+}
+
+/* Spin Animation (keeps center) */
+@keyframes spinCentered {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Bounce Animation (keeps center) */
+@keyframes bounceCentered {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  30%  { transform: translate(-50%, -50%) scale(1.2); }
+  60%  { transform: translate(-50%, -50%) scale(0.95); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Flowers (inside gates, slide out together) */
+.flower {
+  position: absolute;
+  pointer-events: none;
+  width: 250px;          /* Base size for phones */
+  height: auto;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+
+.typewriter-text {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #4a4a4a;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #4a4a4a;
+  animation: typing 4s steps(30, end), blink 0.8s step-end infinite;
+  z-index: 3;
+   letter-spacing: 2px; /* ✅ Added letter spacing */
+}
+
+/* Typewriter effect */
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Cursor blink */
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+
+/* Responsive flower sizing */
+@media (min-width: 768px) {
+  .flower {
+    width: 300px;        /* Tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .flower {
+    width: 450px;        /* Desktop */
+  }
+}
+
+@media (min-width: 1024px) {
+  #openBtn {
+    width: 180px;
+  }
+}
+
+/* Responsive welcome message */
+@media (min-width: 1024px) {
+  .typewriter-text {
+    top: 26%;        /* Tablet */
+  }
+}
