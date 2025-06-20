@@ -149,3 +149,114 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 
 sections.forEach(section => observer.observe(section));
+
+
+
+/* ======================= name typewriter effects ======================= */
+
+
+  const typewriterLines = {
+    groom: "Alvin Hisula Dungog",
+    bride: "Kimberly Justine Carin"
+  };
+
+  const typewriterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const p = entry.target.querySelector('.typewriter-text');
+
+      if (entry.isIntersecting && p) {
+        // Reset state
+        p.classList.remove('typing');
+        p.style.width = '0';
+        p.innerText = '';
+
+        // Force reflow before re-adding animation
+        void p.offsetWidth;
+
+        // Inject text and re-apply animation
+        p.innerText = typewriterLines[id];
+        p.classList.add('typing');
+      } else if (p) {
+        p.classList.remove('typing');
+        p.style.width = '0';
+        p.innerText = '';
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+
+  typewriterObserver.observe(document.getElementById('groom'));
+  typewriterObserver.observe(document.getElementById('bride'));
+
+
+
+/* ======================= Timeline Flower Animation ======================= */
+/* — TIMELINE FLOWER OBSERVER — */
+const timelineSection = document.getElementById('timeline');
+const tlObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const flowers = entry.target.querySelectorAll('.timeline-flower');
+    flowers.forEach(f => {
+      if (entry.isIntersecting) {
+        f.classList.add('tl-show');      // replay on every scroll-in
+      } else {
+        f.classList.remove('tl-show');   // reset when out of view
+      }
+    });
+  });
+},{ threshold: 0.4 }); /* trigger when ~40 % visible */
+
+if (timelineSection) tlObserver.observe(timelineSection);
+
+
+
+
+/* ─ TIMELINE BOX INTERSECTION OBSERVER (self-contained) ─ */
+const tlBoxes = document.querySelectorAll('#timeline .timeline-item');
+
+const tlBoxObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('box-show');   // play animation
+    } else {
+      entry.target.classList.remove('box-show'); // reset for replay
+    }
+  });
+}, { threshold: 0.4 });   // 40 % visible
+
+tlBoxes.forEach(box => tlBoxObserver.observe(box));
+
+
+/* ======================= Copy Number Button with Popup ======================= */
+document.addEventListener("DOMContentLoaded", function () {
+  const copyButton = document.getElementById('copyNumberBtn');
+  const popup = document.getElementById('copyPopup');
+
+  if (copyButton && popup) {
+    copyButton.addEventListener('click', function () {
+      const numberToCopy = '09157241639';
+      navigator.clipboard.writeText(numberToCopy).then(() => {
+        popup.classList.add('show');
+        setTimeout(() => {
+          popup.classList.remove('show');
+        }, 2000);
+      });
+    });
+  }
+});
+
+// Wardrobe image observer – adds/removes .w-show on scroll
+const wardrobeObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('w-show');
+    } else {
+      entry.target.classList.remove('w-show'); // reset for replay
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.w-slide-left, .w-slide-right')
+        .forEach(el => wardrobeObserver.observe(el));
