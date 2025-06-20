@@ -14,6 +14,7 @@ html, body {
   height: 100%;
   scroll-behavior: smooth;
   background: transparent;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 h1 {
@@ -250,6 +251,26 @@ h1 {
   text-align: center;
 }
 
+/* ====================== WARDROBE IMAGE SLIDE-INS ====================== */
+/* These rules touch only the new classes below; .wardrobe-img sizing is unchanged */
+.w-slide-left,
+.w-slide-right {
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+  will-change: transform, opacity;
+}
+
+.w-slide-left  { transform: translateX(-140px); }  /* start left  */
+.w-slide-right { transform: translateX( 140px); }  /* start right */
+
+/* When JS adds .w-show the image settles into place */
+.w-slide-left.w-show,
+.w-slide-right.w-show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+
 /* ───────── COUNTDOWN ───────── */
 .countdown-container {
   text-align: center;
@@ -267,14 +288,13 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 10px;
-  font-size: clamp(16px, 2vw, 25px);
+  font-size: clamp(20px, 1.5vw, 30px);
   color: #952893;
-  font-weight: bold;
 }
 
 .countdown-timer span {
   display: inline-block;
-  min-width: 30px;
+  min-width: 50px;
   text-align: center;
 }
 
@@ -307,7 +327,7 @@ h1 {
   position: fixed;
   bottom: 25px;
   right: 20px;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
   color: rgb(143, 13, 119);
   padding: 10px 15px;
@@ -376,22 +396,7 @@ h1 {
   .title { top: 8vh; }
 }
 
-/* View More Button */
-.view-more-btn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  border: none;
-  background: #b28cbf;
-  color: white;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
 
-.view-more-btn:hover {
-  background: #9b6ca8;
-}
 
 /* Modal Image Viewer */
 .image-viewer-modal {
@@ -514,6 +519,31 @@ h1 {
   margin-bottom: 6px;
 }
 
+
+
+
+
+/* Keyframes */
+@keyframes slideInFromRightEdge {
+  from { transform: translateX(120px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromLeftEdge {
+  from { transform: translateX(-120px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Trigger when scrolled into view */
+.animate-on-scroll.visible.topright-flower {
+  animation: slideInFromRightEdge 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.animate-on-scroll.visible.bottomleft-flower {
+  animation: slideInFromLeftEdge 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
+
 @keyframes spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
@@ -546,3 +576,344 @@ h1 {
 
 
 
+/* ───────── flower animation slides ───────── */
+
+/* ========================= FLOWER ANIMATIONS ========================= */
+/* Everything below affects ONLY the topright_flower.png & bottomleft_flower.png */
+
+.corner-flower{
+  position: absolute;
+  width: clamp(250px, 18vw, 350px);   /* easy to tweak */
+  height: auto;
+  pointer-events: none;
+  opacity: 0;                        /* start hidden */
+  will-change: transform, opacity;   /* smoother */
+  z-index: 15;
+}
+
+/*  Anchor locations (final resting place) */
+.flower-top-right   { top: 0;   right: 0;  transform: translateX(140px); }
+.flower-bottom-left { bottom: 0; left: 0;  transform: translateX(-140px); }
+
+/*  Keyframes – only flowers use these */
+@keyframes flowerSlideFromRight {
+  from { transform: translateX(140px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes flowerSlideFromLeft {
+  from { transform: translateX(-140px); opacity: 0; }
+  to   { transform: translateX(0);      opacity: 1; }
+}
+
+/*  Play the animation when JS toggles .flower-show  */
+.corner-flower.flower-show.flower-top-right   {
+  animation: flowerSlideFromRight 1.2s cubic-bezier(.25,1,.5,1) forwards;
+}
+.corner-flower.flower-show.flower-bottom-left {
+  animation: flowerSlideFromLeft  1.2s cubic-bezier(.25,1,.5,1) forwards;
+}
+/* Responsive flower size for tall screens */
+@media screen and (min-height: 840px) {
+  .corner-flower {
+    width: clamp(350px, 24vw, 400px);
+  }
+}
+
+
+/* ───────── TYPEWRITER EFFECT ───────── */
+.typewriter-container {
+  margin-top: 30px;
+  text-align: center;
+  max-width: 90%;
+}
+
+.typewriter-text {
+  font-family: 'Great Vibes', cursive !important;
+   font-size: clamp(24px, 5vw, 40px);
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #952893;
+  width: 0;
+  opacity: 0;
+}
+.typewriter-text.typing {
+  animation:
+    typing 3s steps(30, end) forwards,
+    blink-caret 0.75s step-end infinite;
+  opacity: 1;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Blinking caret */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #952893; }
+}
+
+
+/* ───────── BOTTOM CENTER FLOWER ───────── */
+.bottom-flower {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(400px, 30vw, 500px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Fade in animation */
+@keyframes fadeInFlower {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Animate on scroll using existing class toggle */
+.animate-on-scroll.visible.bottom-flower {
+  animation: fadeInFlower 1.2s ease-out forwards;
+}
+
+@media screen and (max-height: 850px) {
+  .bottom-flower {
+    width: clamp(250px, 18vw, 280px);  /* ⬅️ smaller flower on short screens */
+    opacity: 1;                      /* optional: slightly less visible */
+  }
+}
+
+
+/* ───────── TIMELINE FLOWERS ───────── */
+.timeline-flower{
+  position: absolute;
+  width: clamp(250px, 22vw, 320px);   /* easy to tweak */
+  height: auto;
+  pointer-events: none;
+  opacity: 0;                         /* start hidden */
+  will-change: transform, opacity;
+  z-index: 15;
+}
+
+/* anchor points */
+.flower-tl { top: 0;    left: 0;  transform: translateX(-140px); }
+.flower-br { bottom: 0; right: 0; transform: translateX(140px);  }
+
+/* keyframes unique to timeline flowers */
+@keyframes tlSlideFromLeft  { from {transform:translateX(-140px); opacity:0;}
+                              to   {transform:translateX(0);      opacity:1;} }
+
+@keyframes tlSlideFromRight { from {transform:translateX(140px);  opacity:0;}
+                              to   {transform:translateX(0);      opacity:1;} }
+
+/* play animation when JS adds .tl-show */
+.timeline-flower.tl-show.flower-tl { animation: tlSlideFromLeft  1.2s cubic-bezier(.25,1,.5,1) forwards; }
+.timeline-flower.tl-show.flower-br { animation: tlSlideFromRight 1.2s cubic-bezier(.25,1,.5,1) forwards; }
+
+/* shrink on short screens (optional) */
+@media screen and (max-height: 890px){
+  .timeline-flower{ width: clamp(200px, 18vw, 300px); }
+}
+
+
+/* ───────── VERTICAL TIMELINE ───────── */
+.timeline-wrapper {
+  position: relative;
+   margin: 15vh auto 0;   /* ✅ Moves the timeline down 10% of screen height */
+  padding: 2vh 0;
+  max-width: 900px;
+}
+
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background-color: #d3b3c6; /* line color */
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+ 
+  box-sizing: border-box;
+   margin-top: -60px;
+}
+
+.timeline-item.left  { left: 0; text-align: right; }
+.timeline-item.right { left: 50%; text-align: left; }
+
+.timeline-content {
+  background: transparent;
+  padding: 10px 16px;         /* 🔽 Slightly reduced padding */
+  border-radius: 8px;
+  /*border: 1px solid #d3b3c6;*/
+  position: relative;
+  z-index: 2;
+  display: flex;              /* ✅ Use flex to control vertical spacing */
+  flex-direction: column;
+  justify-content: center;    /* ✅ Center content vertically */
+  align-items: flex-start;    /* or center, if you want the text centered */
+  gap: 4px;                   /* 🔽 Reduce space between title & time */
+  width: 250px;
+  min-height: 100px;          /* 🔽 Slightly shorter box */
+  box-sizing: border-box;
+}
+
+.timeline-content h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #952893;
+  font-weight: 600;
+  
+}
+
+.timeline-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.timeline-item.right {
+  left: 35%;            /* ✅ Pushes items further to the right */
+  text-align: left;
+  padding-left: 60px;   /* ✅ Adds space from the center line */
+}
+
+.timeline-item.left {
+  left: 6%;         /* ✅ Move more to the left */
+  text-align: right;
+  padding-right: 10px; /* ✅ Add more breathing room */
+}
+
+.with-image {
+  display: flex;
+  align-items: stretch;
+  gap: 10px; /* space between image and text */
+}
+
+.with-image.left-image {
+  flex-direction: row; /* image on the left */
+}
+
+.with-image.right-image {
+  flex-direction: row-reverse; /* image on the right */
+}
+
+.with-image img {
+  height: 100%;            /* ✅ Match height of timeline-content box */
+  aspect-ratio: 1;         /* Keep square shape */
+  object-fit: contain;     /* Or use 'cover' if you want it to fill tighter */
+  display: block;
+}
+
+.with-inner-image img[src*="dinner.png"],
+.with-inner-image img[src*="rings.png"],
+.with-inner-image img[src*="cocktails.png"],
+.with-inner-image img[src*="party.png"] {
+  max-height: 80px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+@media screen and (max-height: 700px) {
+  .timeline-content {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    transform: scale(0.9);   /* ✅ Slightly shrink the whole block */
+  }
+
+  .timeline-content h3 {
+    font-size: 1rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.8rem;
+  }
+
+  .timeline-wrapper::before {
+    width: 2px;  /* Thinner vertical line for small heights */
+  }
+}
+
+
+/* ───────── TIMELINE BOX SLIDE-IN (isolated) ───────── */
+/*  add at very bottom of style.css  */
+
+@keyframes tlSlideLeftIn  { from {transform:translateX(-120px); opacity:0;}
+                            to   {transform:translateX(0);      opacity:1;} }
+
+@keyframes tlSlideRightIn { from {transform:translateX(120px);  opacity:0;}
+                            to   {transform:translateX(0);      opacity:1;} }
+
+.timeline-item.left  .timeline-content {           /* Ceremony & Dinner  */
+  transform: translateX(-120px);
+  opacity: 0;
+  transition: none;                               /* keeps existing look */
+}
+
+.timeline-item.right .timeline-content {           /* Cocktails & Party  */
+  transform: translateX(120px);
+  opacity: 0;
+  transition: none;
+}
+
+/*  When JS toggles .box-show, play the proper animation  */
+.timeline-item.left.box-show  .timeline-content {
+  animation: tlSlideLeftIn 1.3s cubic-bezier(.25,1,.5,1) forwards;
+}
+.timeline-item.right.box-show .timeline-content {
+  animation: tlSlideRightIn 1.3s cubic-bezier(.25,1,.5,1) forwards;
+}
+
+
+/* ───────── COPY BUTTON STYLES ───────── */
+.copy-number-wrapper {
+  position: relative;
+  text-align: center;
+  margin-top: -5px;
+}
+
+#copyNumberBtn {
+  padding: 8px 28px;
+  font-size: 1rem;
+  border: none;
+  background-color: #cbc6cc;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#copyNumberBtn:hover {
+  background-color: #9b6ca8;
+}
+
+.copy-popup {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(35%);
+  background-color: #b28cbf7c;
+  color: white;
+  padding: 14px 28px;
+  font-size: 0.7rem;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+/* Show state */
+.copy-popup.show {
+  opacity: 1;
+}
