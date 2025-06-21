@@ -77,25 +77,54 @@
 
   
 <!-- 🔸 GALLERY -->
-<section id="gallery" class="section gray">
-  <h2 class="title slide-left">Gallery</h2>
-  <div class="gallery-images" id="galleryImages">
-    <img src="image1.jpg" alt="Moment 1" />
-    <img src="image2.jpg" alt="Moment 2" />
-    <img src="image3.jpg" alt="Moment 3" />
-    <img src="image2.jpg" alt="Moment 4" />
- 
+<section id="gallery" class="section">
+  <h2 class="title slide-right">PHOTOS</h2>
+  <div id="carousel-wrap">
+    <div id="carousel">
+      <div class="item">
+        <div class="card" data-image="image1.jpg">
+          <img src="image1.jpg" alt="Test 1" class="card-img">
+        </div>
+        <div class="label">Test 1</div>
+      </div>
+      <div class="item">
+        <div class="card" data-image="image2.jpg">
+          <img src="image1.jpg" alt="Test 2" class="card-img">
+        </div>
+        <div class="label">Test 2</div>
+      </div>
+      <div class="item">
+        <div class="card" data-image="image3.jpg">
+          <img src="image1.jpg" alt="Test 3" class="card-img">
+        </div>
+        <div class="label">Test 3</div>
+      </div>
+      <div class="item">
+        <div class="card" data-image="image4.jpg">
+          <img src="image1.jpg" alt="Test 4" class="card-img">
+        </div>
+        <div class="label">Test 4</div>
+      </div>
+      <div class="item">
+        <div class="card" data-image="image5.jpg">
+          <img src="image1.jpg" alt="Test 5" class="card-img">
+        </div>
+        <div class="label">Test 5</div>
+      </div>
+      <div class="item">
+        <div class="card" data-image="image6.jpg">
+          <img src="image1.jpg" alt="Test 6" class="card-img">
+        </div>
+        <div class="label">Test 6</div>
+      </div>
+    </div>
   </div>
 </section>
-
-<!-- Fullscreen Modal Viewer -->
-<div id="imageViewerModal" class="image-viewer-modal">
-  <span class="close-btn">&times;</span>
-  <img class="modal-image" id="modalImage" src="" alt="">
-  <div class="loader"><span class="gear">⚙️</span> Loading content</div>
-  <div class="nav-btn prev">&#10094;</div>
-  <div class="nav-btn next">&#10095;</div>
-</div>
+<!-- Full-screen image viewer -->
+  <div id="viewer">
+    <img id="viewer-img" src="" alt="Full view">
+    <button id="viewer-close" aria-label="Close">✕</button>
+  </div>
 
 
 <!-- 🔸 DETAILS -->
@@ -119,14 +148,16 @@
     <div style="height:3vh"></div>
 
     <h2 class="details-heading">CHURCH</h2>
-    <h3 class="details-subtext">Cebu Metropolitan Cathedral</h3>
+     <h3 class="details-subtext"><a href="https://maps.app.goo.gl/QyP1HHta6jHonPKE6" target="_blank" rel="noopener noreferrer">  
+    Cebu Metropolitan Cathedral</a></h3>
     <h3 class="details-subtext">Mabini St., Cebu City 6000</h3>
     <h3 class="details-subtext">02:30 PM</h3>
 
     <div style="height:3vh"></div>
 
     <h2 class="details-heading">RECEPTION</h2>
-    <h3 class="details-subtext">Bai Hotel Cebu</h3>
+    <h3 class="details-subtext"><a href="https://www.google.com/maps/place/10%C2%B019'30.6%22N+123%C2%B056'12.3%22E/@10.3253409,123.936226,976m/data=!3m1!1e3!4m4!3m3!8m2!3d10.325172!4d123.936741?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">  
+    Bai Hotel Cebu</a></h3>
     <h3 class="details-subtext">Ouano Ave., Mandaue City</h3>
     <h3 class="details-subtext">06:00 PM</h3>
 
