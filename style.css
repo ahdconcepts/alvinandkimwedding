@@ -181,36 +181,129 @@ h1 {
   border: 2px solid transparent;
 }
 
-/* ───────── GALLERY ───────── */
-.gallery-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-  padding: 15px;
-  overflow-y: auto;
-  max-height: 80vh;
-  width: 100%;
-  /*display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(90px, 25vw, 200px), 1fr));
-  gap: 10px;
-  width: 100%;
-  max-width: 1000px;
-  margin-top: 20px;*/
+/* ─────────────────────────────
+   Carousel wrapper GALLERY
+───────────────────────────── */
+#carousel-wrap {
+  perspective: 1200px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
-.gallery-images img {
+#carousel {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+}
+@media screen and (max-height: 700px) {
+  #carousel {
+   top: 20%;
+  }
+}
 
+/* ─────────────────────────────
+   Carousel items
+───────────────────────────── */
+.item {
+  position: absolute;
+  width: 200px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card {
+  width: 200px;
+  height: 350px;
+  background: transparent;
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+  line-height: 150px;
+  text-align: center;
+  font: bold 22px sans-serif;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -110px;
+  left: 0;
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
+  height: 105px;
+  background: linear-gradient(to top, rgba(86, 83, 87, 0.5), transparent);
+  transform: scaleY(-1);
+  border-radius: 14px;
+  opacity: 0.4;
+  pointer-events: none;
+}
 
-
- /* width: 100%;
-  aspect-ratio: 3 / 3.5;
+/* Card image */
+.card-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid white;*/
+  border-radius: 14px;
+}
+
+/* Card label */
+.label {
+  margin-top: 8px;
+  font-size: 16px;
+  pointer-events: none;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  transform: none !important;
+  backface-visibility: hidden;
+  z-index: 5;
+}
+
+/* ─────────────────────────────
+   Full-screen viewer (lightbox)
+───────────────────────────── */
+#viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+#viewer.show {
+  display: flex;
+}
+
+#viewer-img {
+  max-width: 95vw;
+  max-height: 95vh;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+#viewer-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 38px;
+  cursor: pointer;
+}
+
+#viewer-prev,
+#viewer-next {
+  display: none;
 }
 
 /* ───────── TEXT ───────── */
