@@ -28,69 +28,7 @@ document.querySelectorAll('.animate-on-scroll').forEach(el => {
   imageObserver.observe(el);
 });
 
-/* ======================= Gallery Modal Viewer ======================= */
-const galleryImgs = Array.from(document.querySelectorAll('#galleryImages img'));
-galleryImgs.forEach(img => {
-  const preload = new Image();
-  preload.src = img.src;
-});
 
-const modal = document.getElementById('imageViewerModal');
-const modalImg = document.getElementById('modalImage');
-const closeBtn = modal.querySelector('.close-btn');
-const prevBtn = modal.querySelector('.prev');
-const nextBtn = modal.querySelector('.next');
-const loader = modal.querySelector('.loader');
-let currentIndex = 0;
-
-function openModal(src, index) {
-  currentIndex = index;
-  loader.style.display = 'block';
-  modalImg.style.display = 'none';
-  modalImg.src = src;
-  modal.classList.add('open');
-}
-
-function closeModal() {
-  modal.classList.add('closing');
-  modal.addEventListener(
-    'transitionend',
-    () => modal.classList.remove('open', 'closing'),
-    { once: true }
-  );
-}
-
-function showImage(index) {
-  currentIndex = (index + galleryImgs.length) % galleryImgs.length;
-  loader.style.display = 'block';
-  modalImg.style.display = 'none';
-  modalImg.src = galleryImgs[currentIndex].src;
-}
-
-galleryImgs.forEach((img, idx) => {
-  img.addEventListener('click', () => openModal(img.src, idx));
-});
-
-modalImg.addEventListener('load', () => {
-  loader.style.display = 'none';
-  modalImg.style.display = 'block';
-});
-
-closeBtn.addEventListener('click', closeModal);
-prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
-nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-
-let startX = 0;
-modal.addEventListener('touchstart', e => (startX = e.touches[0].clientX));
-modal.addEventListener('touchend', e => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) nextBtn.click();
-  else if (endX - startX > 50) prevBtn.click();
-});
-
-modal.addEventListener('click', e => {
-  if (e.target === modal) closeModal();
-});
 
 /* ======================= Floating Nav Menu Auto-Close ======================= */
 const navToggle = document.getElementById('navToggle');
@@ -260,3 +198,101 @@ const wardrobeObserver = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.w-slide-left, .w-slide-right')
         .forEach(el => wardrobeObserver.observe(el));
+
+
+
+        const carousel = document.getElementById('carousel');
+const items = [...document.querySelectorAll('.item')];
+const TOTAL = items.length;
+
+/* helper: decide radius from screen width */
+function getRadius () {
+  return window.matchMedia("(min-width: 769px)").matches ? 350 : 270;
+}
+
+/* helper: position every card around the ring */
+function positionItems (radius) {
+  items.forEach((it, i) => {
+    const ang = 360 / TOTAL * i;
+    it.style.transform = `rotateY(${ang}deg) translateZ(${radius}px)`;
+    it.querySelector('.label').style.transform = 'none';
+  });
+}
+
+/* initial layout */
+let RADIUS = getRadius();
+positionItems(RADIUS);
+
+/* re-layout on resize / orientation change */
+window.addEventListener('resize', () => {
+  const newRadius = getRadius();
+  if (newRadius !== RADIUS) {
+    RADIUS = newRadius;
+    positionItems(RADIUS);
+  }
+});
+
+/* ----------  Auto-spin + drag  ---------- */
+let rotY = 0,
+    isDrag = false,
+    startX = 0,
+    auto = true;
+
+function spin() {
+  if (!isDrag && auto) {
+    rotY += 0.15;
+    carousel.style.transform = `translate(-50%,-50%) rotateX(-5deg) rotateY(${rotY}deg)`;
+  }
+  requestAnimationFrame(spin);
+}
+spin();
+
+function dragStart(e) {
+  isDrag = true;
+  auto = false;
+  startX = e.touches ? e.touches[0].clientX : e.clientX;
+}
+
+function dragMove(e) {
+  if (!isDrag) return;
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  rotY += (x - startX) * 0.4;
+  startX = x;
+  carousel.style.transform = `translate(-50%,-50%) rotateX(-5deg) rotateY(${rotY}deg)`;
+}
+
+function dragEnd() {
+  isDrag = false;
+  setTimeout(() => auto = true, 500);
+}
+
+// Drag events
+carousel.addEventListener('mousedown', dragStart);
+window.addEventListener('mousemove', dragMove);
+window.addEventListener('mouseup', dragEnd);
+carousel.addEventListener('touchstart', dragStart, { passive: true });
+window.addEventListener('touchmove', dragMove, { passive: true });
+window.addEventListener('touchend', dragEnd);
+
+/* ----------  Full-screen single image viewer  ---------- */
+const viewer = document.getElementById('viewer');
+const viewerImg = document.getElementById('viewer-img');
+const btnClose = document.getElementById('viewer-close');
+
+items.forEach(it => {
+  const card = it.querySelector('.card');
+  const imgSrc = card.dataset.image;
+
+  card.addEventListener('click', () => {
+    viewerImg.src = imgSrc;
+    viewer.classList.add('show');
+  });
+});
+
+btnClose.onclick = () => viewer.classList.remove('show');
+viewer.addEventListener('click', e => {
+  if (e.target === viewer) viewer.classList.remove('show');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') viewer.classList.remove('show');
+});
