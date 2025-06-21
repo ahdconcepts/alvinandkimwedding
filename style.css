@@ -404,8 +404,8 @@ h1 {
   color: #fff;
   border: none;
   border-radius: 50px;
-  padding: 20px 80px;
-  font-size: 18px;
+  padding: 10px 80px;
+  font-size: 15px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
@@ -418,8 +418,8 @@ h1 {
 /* ───────── NAV MENU BUTTON ───────── */
 .floating-navmenu {
   position: fixed;
-  bottom: 25px;
-  right: 20px;
+  bottom: 14px;
+  right: 15px;
   font-size: 20px;
   font-weight: 600;
   color: rgb(143, 13, 119);
@@ -973,17 +973,19 @@ h1 {
   position: relative;
   text-align: center;
   margin-top: -5px;
+  margin-bottom: 15px;
 }
 
 #copyNumberBtn {
   padding: 8px 28px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   border: none;
-  background-color: #cbc6cc;
-  color: white;
-  border-radius: 25px;
+  background-color: #ffffff;
+  color: rgb(165, 151, 162);
+  border-radius: 10px;
   cursor: pointer;
   transition: background 0.2s ease;
+  box-shadow: 0 4px 7px rgba(43, 43, 43, 0.4);
 }
 
 #copyNumberBtn:hover {
