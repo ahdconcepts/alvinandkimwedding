@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
   <meta charset="UTF-8">
   <title>RSVP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Main styles -->
   <link rel="stylesheet" href="rsvp.css">
 </head>
+
 <body>
   <div class="container">
     <h2>RSVP</h2>
 
+    <!-- ============ STAGE 1: Name and Email input ============ -->
     <div id="stage1" class="stage visible">
-      <p>To RSVP, Type your name.</p>
-      <input type="text" id="nameInput" placeholder="FirstName or LastName">
+      <p>To RSVP, please enter your name and email:</p>
+
+      <input type="text"
+             id="nameInput"
+             placeholder="Your Name (First or Last)" />
+
+      <input type="email"
+             id="emailInput"
+             placeholder="Email (optional)" />
+
       <button onclick="checkName()">Next</button>
-      <p id="error" class="error"></p>
+
+      <p id="error"   class="error"></p>
       <p id="loading" class="loading">
         <span class="spinner">⚙️</span> Connecting to guest list, please wait...
       </p>
     </div>
 
-    
-<div id="matchList" class="match-list"></div>
+    <!-- List of fuzzy-matched names -->
+    <div id="matchList" class="match-list"></div>
 
-    
+    <!-- ============ STAGE 2: Existing response ============ -->
     <div id="stage2" class="stage">
       <p id="greeting"></p>
       <p id="existingResponse"></p>
       <button onclick="showRSVPForm()">Change Response</button>
     </div>
 
+    <!-- ============ STAGE 3: RSVP Yes/No ============ -->
     <div id="stage3" class="stage">
       <p id="inviteMessage"></p>
       <p>Will you be able to attend our wedding?</p>
-      <button onclick="submitResponse('Yes')">Yes</button>
-      <button onclick="submitResponse('No')">No</button>
+
+      <button onclick="submitResponse('Yes, Joyfully Accepts')">Yes, joyfully accepts</button>
+      <button onclick="submitResponse('No, Sadly Decline')">No, sadly declines</button>
     </div>
 
+    <!-- ============ STAGE 4: Thank-you ============ -->
     <div id="stage4" class="stage">
-  <p>Thank you! Your response has been recorded.</p>
-  <p>
-    <a href="index.html" class="redirect-link">Click to return to main page.</a>
-  </p>
-</div>
+      <p>Thank you for responding.</p>
+      <p>A confirmation email will be sent to you shortly..</p>
+      <p>
+        <a href="index.html" class="redirect-link">
+          Click to return to main page.
+        </a>
+      </p>
+    </div>
 
-
-    <button id="closeRSVP" aria-label="Close RSVP" class="close-btn">↩ Back to Home</button>
-
+    <!-- Back/close button -->
+    <button id="closeRSVP"
+            aria-label="Close RSVP"
+            class="close-btn">
+      ↩ Back to Home
+    </button>
   </div>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="rsvp.js"></script>
-  
 </body>
 </html>
