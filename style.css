@@ -86,7 +86,7 @@ h1 {
 
 .welcome-logo {
   position: absolute;
-  top: 55%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -95,7 +95,7 @@ h1 {
 }
 
 .welcome-logo img {
-  width: 70vw;
+  width: 60vw;
   max-width: 600px;
   max-height: 80vh;
   filter: brightness(0) invert(1);
@@ -1013,3 +1013,4 @@ h1 {
 .copy-popup.show {
   opacity: 1;
 }
+
