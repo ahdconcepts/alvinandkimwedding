@@ -74,7 +74,7 @@ h1 {
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  filter: brightness(90%);
+  filter: brightness(95%);
   z-index: 1;
 }
 
@@ -1013,4 +1013,5 @@ h1 {
 .copy-popup.show {
   opacity: 1;
 }
+
 
