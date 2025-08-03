@@ -1045,23 +1045,37 @@ h1 {
 /* ✅ For 375 x 667 devices ONLY */
 @media screen and (max-width: 375px) and (max-height: 667px) {
   #groom .slide-text-container {
-    margin-top: 20px;
+    font-size: 0.7rem;
+    margin-top: 10px;
   }
 
   #groom .slide-text-container p {
-    font-size: 0.85rem;
-    line-height: 1.6;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    line-height: 1.5;
   }
 }
 
 /* ✅ For 390 x 844 devices ONLY */
 @media screen and (min-width: 376px) and (max-width: 390px) and (max-height: 844px) {
   #groom .slide-text-container {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   #groom .slide-text-container p {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+}
+
+/* ✅ For 390 x 844 devices ONLY */
+@media screen and (min-width: 360px) and (max-width: 740px) and (max-height: 844px) {
+  #groom .slide-text-container {
+    margin-top: 10px;
+  }
+
+  #groom .slide-text-container p {
+    font-size: 0.8rem;
     line-height: 1.7;
   }
 }
