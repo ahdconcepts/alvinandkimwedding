@@ -1024,7 +1024,7 @@ h1 {
   line-height: 1.8;
   opacity: 0;
   transform: translateX(100vw);
-  transition: all 0.8s ease;
+  transition: all 1.5s ease;
 }
 .slide-text-container p.slide-left {
   transform: translateX(-200px);
@@ -1033,7 +1033,7 @@ h1 {
   transform: translateX(200px);
 }
 .slide-text-container p.slide-bottom {
-  transform: translateY(80px);
+  transform: translateY(20px);
 }
 .slide-text-container p.visible {
   opacity: 1;
@@ -1091,4 +1091,5 @@ h1 {
     font-size: 1.2rem;
   }
 }
+
 
