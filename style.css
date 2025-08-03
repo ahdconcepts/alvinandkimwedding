@@ -1016,3 +1016,52 @@ h1 {
 
 
 
+
+
+
+.slide-text-container p {
+  font-size: 1rem;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateX(100vw);
+  transition: all 0.8s ease;
+}
+.slide-text-container p.slide-left {
+  transform: translateX(-200px);
+}
+.slide-text-container p.slide-right {
+  transform: translateX(200px);
+}
+.slide-text-container p.slide-bottom {
+  transform: translateY(80px);
+}
+.slide-text-container p.visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+
+
+/* ✅ For 375 x 667 devices ONLY */
+@media screen and (max-width: 375px) and (max-height: 667px) {
+  #groom .slide-text-container {
+    margin-top: 20px;
+  }
+
+  #groom .slide-text-container p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}
+
+/* ✅ For 390 x 844 devices ONLY */
+@media screen and (min-width: 376px) and (max-width: 390px) and (max-height: 844px) {
+  #groom .slide-text-container {
+    margin-top: 20px;
+  }
+
+  #groom .slide-text-container p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+}
