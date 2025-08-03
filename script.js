@@ -90,43 +90,58 @@ sections.forEach(section => observer.observe(section));
 
 
 
-/* ======================= name typewriter effects ======================= */
+// FINAL WORKING TYPEWRITER
+const groomTextEl = document.getElementById("groomText");
 
+if (groomTextEl) {
+  const rawHTML = groomTextEl.getAttribute("data-text");
+  const parser = new DOMParser();
+  const parsed = parser.parseFromString(`<span>${rawHTML}</span>`, "text/html").body.firstChild;
+  const nodes = Array.from(parsed.childNodes);
 
-  const typewriterLines = {
-    groom: "Alvin Hisula Dungog",
-    bride: "Kimberly Justine Carin"
+  groomTextEl.innerHTML = ""; // Clear for typewriter effect
+
+  let nodeIndex = 0;
+  let charIndex = 0;
+
+  const typeNext = () => {
+    if (nodeIndex >= nodes.length) return;
+
+    const currentNode = nodes[nodeIndex];
+
+    if (currentNode.nodeType === Node.TEXT_NODE) {
+      const text = currentNode.textContent;
+      if (charIndex < text.length) {
+        groomTextEl.innerHTML += text[charIndex];
+        charIndex++;
+        setTimeout(typeNext, 22);
+      } else {
+        nodeIndex++;
+        charIndex = 0;
+        typeNext();
+      }
+    } else if (currentNode.nodeType === Node.ELEMENT_NODE) {
+      groomTextEl.innerHTML += currentNode.outerHTML;
+      nodeIndex++;
+      charIndex = 0;
+      setTimeout(typeNext, 22);
+    }
   };
 
-  const typewriterObserver = new IntersectionObserver(entries => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      const id = entry.target.id;
-      const p = entry.target.querySelector('.typewriter-text');
-
-      if (entry.isIntersecting && p) {
-        // Reset state
-        p.classList.remove('typing');
-        p.style.width = '0';
-        p.innerText = '';
-
-        // Force reflow before re-adding animation
-        void p.offsetWidth;
-
-        // Inject text and re-apply animation
-        p.innerText = typewriterLines[id];
-        p.classList.add('typing');
-      } else if (p) {
-        p.classList.remove('typing');
-        p.style.width = '0';
-        p.innerText = '';
+      if (entry.isIntersecting) {
+        typeNext();
+        observer.unobserve(groomTextEl);
       }
     });
-  }, {
-    threshold: 0.5
-  });
+  }, { threshold: 0.4 });
 
-  typewriterObserver.observe(document.getElementById('groom'));
-  typewriterObserver.observe(document.getElementById('bride'));
+  observer.observe(groomTextEl);
+}
+
+
+
 
 
 
@@ -295,4 +310,21 @@ viewer.addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') viewer.classList.remove('show');
+});
+
+
+
+// Slide-in observer with replay on scroll for GROOM section
+const slideObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible'); // remove when out of view
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('#groom .slide-text-container p').forEach(p => {
+  slideObserver.observe(p);
 });
