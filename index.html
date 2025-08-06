@@ -193,30 +193,15 @@
     <p>The biggest gift to us is your presence at our wedding.</p>
     <p>If you wish to honor us further, a monetary gift would be deeply appreciated.</p>
 
-    <!-- ✅ VISITOR COUNTER HERE -->
-    <div style="margin-top: 2rem; text-align: center; font-size: 12px; font-weight: 300; color: rgb(123, 3, 119);">
-      Visitors: <span id="visit-counter">...</span>
+    <!-- Visitor Counter -->
+    <div style="margin-top:2rem; text-align:center;">
+      <a href='http://www.freevisitorcounters.com' target="_blank" style="color: white; font-size: 12px;">Free Visitor Counter</a><br>
+      <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=72890f8571f6cfd7a587bbe72bf41fc38b39f2b9'></script>
+      <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1373841/t/11"></script>
     </div>
   </div>
 </section>
 
-<script>
-  async function updateVisitorCount() {
-    try {
-      const response = await fetch('https://api.countapi.store/hit/alvindungog.github.io/wedding-website');
-      const data = await response.json();
-      document.getElementById("visit-counter").innerText = data.value;
-    } catch (error) {
-      console.error("Visitor counter failed:", error);
-    }
-  }
-
-  window.onload = updateVisitorCount;
-</script>
-
-
-  window.onload = updateVisitorCount;
-</script>
 
   <!-- 🔸 RSVP Floating Button -->
   <div class="rsvpButton">
@@ -312,6 +297,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
