@@ -183,19 +183,36 @@
 
   <!-- 🔸 GIFTS -->
   <section id="gifts" class="section gray">
-    <h2 class="title slide-top">GIFTS</h2>
-    <div class="sendgifts-content">
-      <div style="height:7vh"></div>
-      <img src="gcash.png" alt="GCash QR Code" class="qrcode-img" />
-      <div style="height:3vh"></div>
-      <div class="copy-number-wrapper">
-        <button id="copyNumberBtn">Click to Copy Number</button>
-        <div id="copyPopup" class="copy-popup">Copied to the clipboard</div>
-      </div>
-      <p>The biggest gift to us is your presence at our wedding.</p>
-      <p>If you wish to honor us further, a monetary gift would be deeply appreciated.</p>
+  <h2 class="title slide-top">GIFTS</h2>
+  <div class="sendgifts-content">
+    <img src="gcash.png" alt="GCash QR Code" class="qrcode-img" />
+    <div class="copy-number-wrapper">
+      <button id="copyNumberBtn">Click to Copy Number</button>
+      <div id="copyPopup" class="copy-popup">Copied to the clipboard</div>
     </div>
-  </section>
+    <p>The biggest gift to us is your presence at our wedding.</p>
+    <p>If you wish to honor us further, a monetary gift would be deeply appreciated.</p>
+
+    <!-- ✅ VISITOR COUNTER HERE -->
+    <div style="margin-top: 2rem; text-align: center; font-size: 12px; font-weight: 300; color: rgb(123, 3, 119);">
+      Visitors: <span id="visit-counter">...</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  async function updateVisitorCount() {
+    try {
+      const response = await fetch('https://api.countapi.xyz/hit/alvinandkimwedding.com/index.html');
+      const data = await response.json();
+      document.getElementById("visit-counter").innerText = data.value;
+    } catch (error) {
+      console.error("Visitor counter failed:", error);
+    }
+  }
+
+  window.onload = updateVisitorCount;
+</script>
 
   <!-- 🔸 RSVP Floating Button -->
   <div class="rsvpButton">
@@ -291,6 +308,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
